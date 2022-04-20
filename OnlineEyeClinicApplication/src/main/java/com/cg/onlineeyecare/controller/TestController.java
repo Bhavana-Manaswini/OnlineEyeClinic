@@ -55,7 +55,7 @@ public class TestController {
 		return new ResponseEntity<Test>(TestService.viewTest(testId),HttpStatus.OK);
 	}	 
     //build get all tests REST API
-    @GetMapping("viewAllTests")
+    @GetMapping("/viewAllTests")
 	public List<Test> viewAllTests(){
 		return TestService.viewAllTests();
 	}

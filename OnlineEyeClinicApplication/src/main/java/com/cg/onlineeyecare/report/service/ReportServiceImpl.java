@@ -59,7 +59,7 @@ public class ReportServiceImpl implements IReportService{
 		List<Report> listRep=RepRepo.findAll();
 		List<Report> list=new ArrayList<Report>();
 		for(Report r:listRep) {
-			if(r.getDateOfReport()==date) {
+			if(r.getDateOfReport().isEqual(date)) {
 				list.add(r);
 			}
 		}

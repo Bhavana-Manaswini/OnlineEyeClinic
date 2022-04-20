@@ -1,5 +1,6 @@
 package com.cg.onlineeyecare.controller;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,7 +17,7 @@ import com.cg.onlineeyecare.appointment.dto.Appointment;
 import com.cg.onlineeyecare.appointment.service.IAppointmentService;
 import com.cg.onlineeyecare.exceptions.AppointmentIdNotFoundException;
 import com.cg.onlineeyecare.exceptions.InvalidAppointmentException;
-/*  @RestController combines @Controller and @ResponseBody, which eliminates the need to annotate every 
+/* @RestController combines @Controller and @ResponseBody, which eliminates the need to annotate every 
  * request handling method of the controller class with the @ResponseBody annotation */
 //@RequestMapping is used to map web requests onto specific handler classes and/or handler methods
 @RestController
@@ -60,8 +61,9 @@ public class AppointmentController {
 		return AppointmentService.viewAllAppointments();
 	}
 	//build get appointment with date REST API
-	@GetMapping("viewAppointmentWithDate/{date}")
-	public List<Appointment> viewAppointments(@PathVariable("date") LocalDate date) {
-		return AppointmentService.viewAppointments(date);
+	@GetMapping("/viewAppointmentWithDate/{date}")
+	public List<Appointment> viewAppointments(@PathVariable("date") String date) {
+		LocalDate localDate = LocalDate.parse(date,DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		return AppointmentService.viewAppointments(localDate);
 	}
 }

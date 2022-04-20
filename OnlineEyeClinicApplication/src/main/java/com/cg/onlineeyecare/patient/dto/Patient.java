@@ -1,5 +1,7 @@
 package com.cg.onlineeyecare.patient.dto;
 import com.cg.onlineeyecare.report.dto.Report;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.time.LocalDate;
 import java.io.Serializable;
 import javax.persistence.Column;
@@ -42,7 +44,9 @@ public class Patient implements Serializable{
 	private String patientAddress;
 	@Column(name="Appointment")
 	private Appointment appointment;
+	
 	@OneToOne(mappedBy="patient")
+	@JsonIgnoreProperties("patient")//ignores the property 
 	private Report report;
 	//Constructor
 	public Patient() {
@@ -51,7 +55,7 @@ public class Patient implements Serializable{
 	//Parameterized constructor
 	public Patient(int patientId, String patientName, int patientAge, long patientMobile, String patientEmail,
 			LocalDate patientDOB, String patientUsername, String patientPassword, String patientAddress,
-			Appointment appointment, Report report) {
+			Appointment appointment) {
 		super();
 		this.patientId = patientId;
 		this.patientName = patientName;
@@ -63,7 +67,6 @@ public class Patient implements Serializable{
 		this.patientPassword = patientPassword;
 		this.patientAddress = patientAddress;
 		this.appointment = appointment;
-		this.report = report;
 	}
 	//getters and setters
 	public int getPatientId() {

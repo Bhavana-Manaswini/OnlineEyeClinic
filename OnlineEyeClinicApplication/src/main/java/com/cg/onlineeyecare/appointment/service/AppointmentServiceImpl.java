@@ -30,11 +30,11 @@ public class AppointmentServiceImpl implements IAppointmentService{
 	@Override
 	public Appointment updateAppointment(Appointment appointment)throws InvalidAppointmentException{
 		Appointment appointment1 = AppRepo.findById(appointment.getAppointmentId()).orElseThrow(()->new InvalidAppointmentException("Invalid appointment for this Id: "+ appointment.getAppointmentId()));
-		appointment1.setConsultationFee(appointment1.getConsultationFee());
-		appointment1.setDateOfAppointment(appointment1.getDateOfAppointment());
-		appointment1.setDoctor(appointment1.getDoctor());
-		appointment1.setPatient(appointment1.getPatient());
-		appointment1.setTimeOfAppointment(appointment1.getTimeOfAppointment());
+		appointment1.setConsultationFee(appointment.getConsultationFee());
+		appointment1.setDateOfAppointment(appointment.getDateOfAppointment());
+		appointment1.setDoctor(appointment.getDoctor());
+		appointment1.setPatient(appointment.getPatient());
+		appointment1.setTimeOfAppointment(appointment.getTimeOfAppointment());
 		return AppRepo.saveAndFlush(appointment1);
 	}
 	@Override
@@ -54,10 +54,10 @@ public class AppointmentServiceImpl implements IAppointmentService{
 	}
 	@Override
 	public List<Appointment> viewAppointments(LocalDate date){
-		List<Appointment> appointment4 = AppRepo.findAll();
+		List<Appointment> appointment = AppRepo.findAll();
 		List<Appointment> list = new ArrayList<Appointment>();
-		for(Appointment app:appointment4) {
-			if(app.getDateOfAppointment().equals(date)) {
+		for(Appointment app:appointment) {
+			if(app.getDateOfAppointment().isEqual(date)) {
 				list.add(app);
 			}
 		}

@@ -1,5 +1,6 @@
 package com.cg.onlineeyecare.controller;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -55,8 +56,9 @@ public class ReportController {
 	}
 	//build get report with date REST API
 	@GetMapping("/viewReportsWithDate/{date}")
-	public List<Report> viewAllReport(@PathVariable("date") LocalDate date){
-		return ReportService.viewAllReport(date);
+	public List<Report> viewAllReport(@PathVariable("date") String date){
+		LocalDate localDate = LocalDate.parse(date,DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		return ReportService.viewAllReport(localDate);
 	}
 	//build get spectacles REST API
 	@GetMapping("/viewSpectacles")

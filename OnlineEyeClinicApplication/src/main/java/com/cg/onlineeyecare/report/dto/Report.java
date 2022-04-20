@@ -3,6 +3,8 @@ import java.time.LocalDate;
 import com.cg.onlineeyecare.patient.dto.Patient;
 import com.cg.onlineeyecare.spectacles.dto.Spectacles;
 import com.cg.onlineeyecare.test.dto.Test;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -40,7 +42,7 @@ public class Report implements Serializable{
 	private String visualAcuityForDistance;
 	@Column(name="Spectacles")
 	private Spectacles spectacles;
-	
+	@JsonIgnoreProperties("report")//ignores the property 
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name = "patientId", referencedColumnName ="patientId")
 	private Patient patient;
