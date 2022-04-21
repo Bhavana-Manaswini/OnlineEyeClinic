@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.time.LocalDate;
 import java.io.Serializable;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,7 +23,6 @@ import com.cg.onlineeyecare.appointment.dto.Appointment;
 @Table(name="patients")
 public class Patient implements Serializable{
 	@Id//correspond to the primary key of the object's table
-	@GeneratedValue(strategy=GenerationType.AUTO)//automatically generates the primary key value
 	//@Column Specifies the mapped column for a persistent property
 	@Column(name="PatientId",nullable=false)
 	private int patientId;
@@ -36,13 +37,14 @@ public class Patient implements Serializable{
 	@DateTimeFormat(style = "yyyy-MM-dd")
 	@Column(name="PatientDOB")
 	private LocalDate patientDOB;
-	@Column(name="PatientUsername")
+	@Column(name="PatientUsername", nullable=false)
 	private String patientUsername;
-	@Column(name="PatientPassword")
+	@Column(name="PatientPassword", nullable=false)
 	private String patientPassword;
 	@Column(name="PatientAddress")
 	private String patientAddress;
-	@Column(name="Appointment")
+	
+	@OneToOne(cascade=CascadeType.ALL)
 	private Appointment appointment;
 	
 	@OneToOne(mappedBy="patient")

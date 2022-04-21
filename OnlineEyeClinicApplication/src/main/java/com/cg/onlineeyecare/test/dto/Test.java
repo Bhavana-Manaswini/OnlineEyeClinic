@@ -14,7 +14,6 @@ import javax.persistence.Table;
 @Table(name="tests")
 public class Test implements Serializable{
 	@Id//correspond to the primary key of the object's table
-	@GeneratedValue(strategy=GenerationType.AUTO)//automatically generates the primary key value
 	//@Column Specifies the mapped column for a persistent property
 	@Column(name="TestId",nullable=false)
 	private int testId;

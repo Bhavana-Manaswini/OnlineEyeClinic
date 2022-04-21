@@ -13,7 +13,6 @@ import javax.persistence.Table;
 @Table(name="spectacles")
 public class Spectacles implements Serializable{
 	@Id//correspond to the primary key of the object's table
-	@GeneratedValue(strategy=GenerationType.AUTO)//automatically generates the primary key value
 	//@Column Specifies the mapped column for a persistent property
 	@Column(name="SpectaclesId",nullable=false)
 	private int spectaclesId;

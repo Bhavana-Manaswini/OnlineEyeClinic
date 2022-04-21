@@ -13,5 +13,5 @@ public interface IDoctorService {
 	Doctor viewDoctor(int doctorId) throws DoctorIdNotFoundException;
 	List<Doctor> viewDoctorsList();
 	List<Appointment> viewAppointments();
-	Test createTest(Test test);
+	Test createTest(int doctorId,Test test);
 }

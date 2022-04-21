@@ -8,11 +8,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import org.springframework.format.annotation.DateTimeFormat;
 import com.cg.onlineeyecare.doctor.dto.Doctor;
 import com.cg.onlineeyecare.patient.dto.Patient;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 //@Entity annotation specifies that the class is an entity and is mapped to a database table
 @Entity
 /*@Table annotation allows you to specify the details of the table that will be used to persist 
@@ -20,7 +22,6 @@ import com.cg.onlineeyecare.patient.dto.Patient;
 @Table(name="appointments")
 public class Appointment implements Serializable{
 	@Id//correspond to the primary key of the object's table
-	@GeneratedValue(strategy=GenerationType.AUTO)//automatically generates the primary key value
 	//@Column Specifies the mapped column for a persistent property
 	@Column(name="AppointmentId", nullable=false)
 	private int appointmentId;
@@ -32,9 +33,11 @@ public class Appointment implements Serializable{
 	private LocalTime timeOfAppointment;
 	@Column(name="ConsultationFee", nullable=false)
 	private double consultationFee;
-	@OneToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="doctorId",referencedColumnName ="doctorId")
+	
+	@ManyToOne
+	@JoinColumn(name="doctorId",referencedColumnName ="doctorId")	
 	private Doctor doctor;
+	
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name = "patientId", referencedColumnName ="patientId")
 	private Patient patient;

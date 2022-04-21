@@ -2,11 +2,17 @@ package com.cg.onlineeyecare.doctor.dto;
 import com.cg.onlineeyecare.appointment.dto.Appointment;
 import com.cg.onlineeyecare.test.dto.Test;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.OneToOne;
 //@Entity annotation specifies that the class is an entity and is mapped to a database table
@@ -16,7 +22,6 @@ import javax.persistence.OneToOne;
 @Table(name="doctors")
 public class Doctor implements Serializable{
 	@Id//correspond to the primary key of the object's table
-	@GeneratedValue(strategy=GenerationType.AUTO)//automatically generates the primary key value
 	//@Column Specifies the mapped column for a persistent property
 	@Column(name="DoctorId",nullable=false)
 	private int doctorId;
@@ -28,23 +33,26 @@ public class Doctor implements Serializable{
 	private long doctorMobile;
 	@Column(name="DoctorEmail",nullable=false)
 	private String doctorEmail;
-	@Column(name="DoctorUsername")
+	@Column(name="DoctorUsername", nullable=false)
 	private String doctorUsername;
-	@Column(name="DoctorPassword")
+	@Column(name="DoctorPassword", nullable=false)
 	private String doctorPassword;
 	@Column(name="DoctorAddress")
 	private String doctorAddress;
+	
 	@Column(name="Test")
-	private Test test;
-	@OneToOne(mappedBy="doctor")
-	private Appointment appointment;
+	private List<Test> test=new ArrayList<>();
+	
+	@OneToMany(mappedBy="doctor",cascade=CascadeType.ALL,orphanRemoval=true)
+	private List<Appointment> appointment=new ArrayList<>();
 	//Constructor
 	public Doctor() {	
 		super();
 	}	
 	//Parameterized constructor
 	public Doctor(int doctorId, String doctorName, String doctorConsultationTime, long doctorMobile, String doctorEmail,
-			String doctorUsername, String doctorPassword, String doctorAddress, Test test, Appointment appointment) {
+			String doctorUsername, String doctorPassword, String doctorAddress, List<Test> test,
+			List<Appointment> appointment) {
 		super();
 		this.doctorId = doctorId;
 		this.doctorName = doctorName;
@@ -106,18 +114,17 @@ public class Doctor implements Serializable{
 	public void setDoctorAddress(String doctorAddress) {
 		this.doctorAddress = doctorAddress;
 	}
-	public Test getTest() {
+	public List<Test> getTest() {
 		return test;
 	}
-	public void setTest(Test test) {
+	public void setTest(List<Test> test) {
 		this.test = test;
 	}
 	
-	public Appointment getAppointment() {
+	public List<Appointment> getAppointment() {
 		return appointment;
 	}
-
-	public void setAppointment(Appointment appointment) {
+	public void setAppointment(List<Appointment> appointment) {
 		this.appointment = appointment;
 	}
 	//overriding toString Method

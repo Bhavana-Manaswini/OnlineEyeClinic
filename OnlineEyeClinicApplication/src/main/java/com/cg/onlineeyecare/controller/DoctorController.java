@@ -65,8 +65,8 @@ public class DoctorController {
 		return DoctorService.viewAppointments();
 	}
     //build create test REST API
-    @PutMapping("/createTest")
-    public ResponseEntity<Test> createTest(@RequestBody Test test){
-		return new ResponseEntity<Test>(DoctorService.createTest(test),HttpStatus.OK);
+    @PutMapping("/createTest/{doctorId}")
+    public ResponseEntity<Test> createTest(@PathVariable("doctorId") int doctorId,@RequestBody Test test){
+		return new ResponseEntity<Test>(DoctorService.createTest(doctorId,test),HttpStatus.OK);
 	}
 }

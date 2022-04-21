@@ -64,24 +64,21 @@ public class DoctorServiceImpl implements IDoctorService{
 		List<Doctor> listDoc=DocRepo.findAll();
 		List<Appointment> list=new ArrayList<Appointment>();
 		for(Doctor d:listDoc) {
-			if(d.getAppointment()!=null) {
-				list.add(d.getAppointment());
+			for(Appointment a:d.getAppointment()) {
+				list.add(a);
 			}
 		}
 		return list;
 	}
-
 	@Override
-	public Test createTest(Test test) {
-		List<Doctor> listDoc=DocRepo.findAll();
-		for(Doctor d:listDoc) {
-			if(d.getTest()==null) {
-				d.setTest(test);
-				DocRepo.saveAndFlush(d);
-				break;
-			}
-		}
+	public Test createTest(int doctorId, Test test) {
+		Doctor d=DocRepo.getById(doctorId);
+		List<Test> tl=d.getTest();
+		tl.add(test);
+		d.setTest(tl);
 		return test;
 	}
+
+	
 
 }
