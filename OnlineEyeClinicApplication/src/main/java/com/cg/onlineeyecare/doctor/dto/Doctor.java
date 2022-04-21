@@ -22,6 +22,7 @@ import javax.persistence.OneToOne;
 @Table(name="doctors")
 public class Doctor implements Serializable{
 	@Id//correspond to the primary key of the object's table
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	//@Column Specifies the mapped column for a persistent property
 	@Column(name="DoctorId",nullable=false)
 	private int doctorId;

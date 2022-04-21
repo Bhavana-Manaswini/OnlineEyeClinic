@@ -22,6 +22,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Table(name="appointments")
 public class Appointment implements Serializable{
 	@Id//correspond to the primary key of the object's table
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	//@Column Specifies the mapped column for a persistent property
 	@Column(name="AppointmentId", nullable=false)
 	private int appointmentId;
@@ -38,9 +39,11 @@ public class Appointment implements Serializable{
 	@JoinColumn(name="doctorId",referencedColumnName ="doctorId")	
 	private Doctor doctor;
 	
-	@OneToOne(cascade=CascadeType.ALL)
+	@OneToOne(mappedBy="appointment")
+	@JsonIgnoreProperties("appointment")//ignores the property 
 	@JoinColumn(name = "patientId", referencedColumnName ="patientId")
 	private Patient patient;
+	
 	//Constructor
 	public Appointment() {
 		super();

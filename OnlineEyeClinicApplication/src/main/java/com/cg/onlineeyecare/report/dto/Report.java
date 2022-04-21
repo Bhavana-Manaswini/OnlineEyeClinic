@@ -9,6 +9,8 @@ import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Table;
@@ -23,6 +25,7 @@ import javax.persistence.OneToOne;
 @Table(name="reports")
 public class Report implements Serializable{
 	@Id//correspond to the primary key of the object's table
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	//@Column Specifies the mapped column for a persistent property
 	@Column(name="ReportId",nullable=false)
 	private int reportId;

@@ -17,6 +17,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Table(name="tests")
 public class Test implements Serializable{
 	@Id//correspond to the primary key of the object's table
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	//@Column Specifies the mapped column for a persistent property
 	@Column(name="TestId",nullable=false)
 	private int testId;

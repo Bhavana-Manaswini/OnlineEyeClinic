@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -23,6 +24,7 @@ import com.cg.onlineeyecare.appointment.dto.Appointment;
 @Table(name="patients")
 public class Patient implements Serializable{
 	@Id//correspond to the primary key of the object's table
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	//@Column Specifies the mapped column for a persistent property
 	@Column(name="PatientId",nullable=false)
 	private int patientId;
@@ -45,6 +47,7 @@ public class Patient implements Serializable{
 	private String patientAddress;
 	
 	@OneToOne(cascade=CascadeType.ALL)
+	@JsonIgnoreProperties("patient")//ignores the property 
 	private Appointment appointment;
 	
 	@OneToOne(mappedBy="patient")
