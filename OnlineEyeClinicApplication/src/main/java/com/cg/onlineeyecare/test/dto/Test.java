@@ -1,4 +1,5 @@
 package com.cg.onlineeyecare.test.dto;
+import com.cg.onlineeyecare.doctor.dto.Doctor;
 import com.cg.onlineeyecare.test.dto.Test;
 import java.io.Serializable;
 import javax.persistence.Column;
@@ -6,7 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 //@Entity annotation specifies that the class is an entity and is mapped to a database table
 @Entity
 /*@Table annotation allows you to specify the details of the table that will be used to persist 

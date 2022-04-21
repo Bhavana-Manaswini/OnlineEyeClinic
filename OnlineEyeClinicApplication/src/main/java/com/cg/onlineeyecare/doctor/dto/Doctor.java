@@ -41,7 +41,7 @@ public class Doctor implements Serializable{
 	private String doctorAddress;
 	
 	@Column(name="Test")
-	private List<Test> test=new ArrayList<>();
+	private Test test;
 	
 	@OneToMany(mappedBy="doctor",cascade=CascadeType.ALL,orphanRemoval=true)
 	private List<Appointment> appointment=new ArrayList<>();
@@ -51,7 +51,7 @@ public class Doctor implements Serializable{
 	}	
 	//Parameterized constructor
 	public Doctor(int doctorId, String doctorName, String doctorConsultationTime, long doctorMobile, String doctorEmail,
-			String doctorUsername, String doctorPassword, String doctorAddress, List<Test> test,
+			String doctorUsername, String doctorPassword, String doctorAddress,Test test,
 			List<Appointment> appointment) {
 		super();
 		this.doctorId = doctorId;
@@ -114,10 +114,10 @@ public class Doctor implements Serializable{
 	public void setDoctorAddress(String doctorAddress) {
 		this.doctorAddress = doctorAddress;
 	}
-	public List<Test> getTest() {
+	public Test getTest() {
 		return test;
 	}
-	public void setTest(List<Test> test) {
+	public void setTest(Test test) {
 		this.test = test;
 	}
 	

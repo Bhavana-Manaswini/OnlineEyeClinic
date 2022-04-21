@@ -73,9 +73,7 @@ public class DoctorServiceImpl implements IDoctorService{
 	@Override
 	public Test createTest(int doctorId, Test test) {
 		Doctor d=DocRepo.getById(doctorId);
-		List<Test> tl=d.getTest();
-		tl.add(test);
-		d.setTest(tl);
+		d.setTest(test);
 		return test;
 	}
 
